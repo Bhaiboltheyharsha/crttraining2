@@ -1,15 +1,31 @@
-s=[]
-s=input('string:')
-s=list(s)
-for i in s:
-    if i=='(':
-        s.append(i)
-    elif i==')':
-        s.pop(0)
+def balanced(s):
+    e = []
+    for i in s:
+        if i in ['[','(','{']:
+            e.append(i)
+        else:
+            if len(e)!=0:
+                if i==']':
+                    if e[-1] == '[':
+                        e.pop()
+                    else:
+                        return False
+                elif i=='}':
+                    if e[-1] == '{':
+                        e.pop()
+                    else:
+                        return False
+                elif i=='(':
+                    if e[-1] == ')':
+                        e.pop()
+                    else:
+                        return False
+            else:
+                return False
+    return True
+s = input()
+e = balanced(s)
+if e:
+    print("balanced")
 else:
-    print("Invalid Input")
-#print(s)
-if len(s) == 0:
-    print("Valid")
-else:
-    print("Invalid",len(s))
+    print("not balanced")
